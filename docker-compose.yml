@@ -1,0 +1,52 @@
+version: '2.3'
+
+x-lagoon-project:
+  &lagoon-project wo-demo-lagoon-n8n
+
+x-environment:
+  &default-environment
+    LAGOON_PROJECT: *lagoon-project
+    LAGOON_ROUTE: http://wo-demo-lagoon-n8n.docker.amazee.io
+
+services:
+        
+  # SERVICE: N8N container
+  n8n:
+    env_file:
+      - .lagoon.env
+      - .env.local
+    networks:
+      - amazeeio-network
+      - default
+    build:
+      context: .
+      dockerfile: lagoon/n8n.dockerfile
+    environment:
+      << : *default-environment # loads the defined environment variables from the top
+    labels:
+      # Lagoon Labels
+      lagoon.type: node-persistent
+      lagoon.persistent.name: nginx # mount the persistent storage of nginx into this container
+      lagoon.persistent: /app/storage/ # location where the persistent storage should be mounted
+      lagoon.deployment.servicetype: node
+    volumes:
+      - ./storage:/app/storage:delegated
+    depends_on:
+      - mariadb
+    restart: always
+
+  # SERVICE: MariaDB
+  mariadb:
+    env_file:
+      - .lagoon.env
+      - .env.local
+    networks:
+      - amazeeio-network
+      - default
+    image: amazeeio/mariadb
+    labels:
+      lagoon.type: mariadb
+
+networks:
+  amazeeio-network:
+    external: true
