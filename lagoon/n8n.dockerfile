@@ -27,6 +27,8 @@ ENV NODE_ICU_DATA /usr/local/lib/node_modules/full-icu
 
 ENV N8N_PORT 3000
 ENV N8N_PROTOCOL http
+ENV N8N_USER_FOLDER /app/storage
+ENV EXECUTIONS_DATA_PRUNE true
 
 ENV DB_TYPE mysqldb 
 ENV DB_MYSQLDB_DATABASE lagoon
@@ -35,12 +37,9 @@ ENV DB_MYSQLDB_PORT 3306
 ENV DB_MYSQLDB_USER lagoon
 ENV DB_MYSQLDB_PASSWORD lagoon 
 
-
-#COPY docker-entrypoint.sh /docker-entrypoint.sh
-#ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
-
 EXPOSE 3000
 
+COPY /app /app
 COPY lagoon/n8n-entrypoint.sh /lagoon/entrypoints/71-n8n-entrypoint
 
-CMD ["n8n","start"]
+CMD ["/app/start-n8n-simple"]

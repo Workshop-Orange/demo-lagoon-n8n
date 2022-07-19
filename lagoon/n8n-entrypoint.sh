@@ -8,4 +8,7 @@ if [ -d /root/.n8n ] ; then
   ln -s /root/.n8n /home/node/
 fi
 
+echo "Settng N8N_EDITOR_BASE_URL to $LAGOON_ROUTE"
+export N8N_EDITOR_BASE_URL=$LAGOON_ROUTE
+
 chown -R node /home/node

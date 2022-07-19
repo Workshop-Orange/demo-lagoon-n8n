@@ -26,8 +26,8 @@ services:
     labels:
       # Lagoon Labels
       lagoon.type: node-persistent
-      lagoon.persistent.name: nginx # mount the persistent storage of nginx into this container
-      lagoon.persistent: /app/storage/ # location where the persistent storage should be mounted
+      # lagoon.persistent.name: nginx # mount the persistent storage of nginx into this container
+      # lagoon.persistent: /app/storage/ # location where the persistent storage should be mounted
       lagoon.deployment.servicetype: node
     volumes:
       - ./storage:/app/storage:delegated

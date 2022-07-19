@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -z $N8N_EDITOR_BASE_URL ]; then
+    echo "Settng N8N_EDITOR_BASE_URL to $LAGOON_ROUTE"
+    export N8N_EDITOR_BASE_URL=$LAGOON_ROUTE
+fi
+
+n8n start 
