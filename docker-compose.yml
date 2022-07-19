@@ -30,7 +30,7 @@ services:
       # lagoon.persistent.name: nginx # mount the persistent storage of nginx into this container
       # lagoon.deployment.servicetype: node
     volumes:
-      - ./storage:/app/storage:delegated
+      - ./app/storage:/app/storage:delegated
     depends_on:
       - mariadb
     restart: always

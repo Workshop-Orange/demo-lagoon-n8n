@@ -1,8 +1,9 @@
 #!/bin/sh
 
-if [ -z $N8N_EDITOR_BASE_URL ]; then
-    echo "Settng N8N_EDITOR_BASE_URL to $LAGOON_ROUTE"
-    export N8N_EDITOR_BASE_URL=$LAGOON_ROUTE
-fi
+. /app/n8n-lagoon-vars
+
+if [ ! -d "/app/storage/.n8n/" ]; then
+    mkdir "/app/storage/.n8n"
+fi;
 
 n8n start 

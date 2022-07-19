@@ -1,0 +1,32 @@
+#!/bin/sh
+
+if [ -z $N8N_EDITOR_BASE_URL ]; then
+    echo "Settng N8N_EDITOR_BASE_URL to $LAGOON_ROUTE"
+    export N8N_EDITOR_BASE_URL=$LAGOON_ROUTE
+fi
+
+if [ -z $MARIADB_DATABASE ]; then
+    export MARIADB_DATABASE="lagoon"
+fi
+
+if [ -z $MARIADB_HOST ]; then
+    export MARIADB_HOST="mariadb"
+fi
+
+if [ -z $MARIADB_PORT ]; then
+    export MARIADB_PORT="3306"
+fi
+
+if [ -z $MARIADB_USERNAME ]; then
+    export MARIADB_USERNAME="lagoon"
+fi
+
+if [ -z $MARIADB_PASSWORD ]; then
+    export MARIADB_PASSWORD="lagoon"
+fi
+
+export DB_MYSQLDB_DATABASE=$MARIADB_DATABASE
+export DB_MYSQLDB_HOST=$MARIADB_HOST
+export DB_MYSQLDB_PORT=$MARIADB_PORT
+export DB_MYSQLDB_USER=$MARIADB_USERNAME
+export DB_MYSQLDB_PASSWORD=$MARIADB_PASSWORD
